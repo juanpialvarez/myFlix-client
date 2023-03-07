@@ -27306,7 +27306,7 @@ const MainView = ()=>{
                 },
                 death: null
             },
-            imagePath: "https://www.imdb.com/title/tt0111161/mediaviewer/rm1690056449/?ref_=tt_ov_i",
+            imagePath: "https://source.unsplash.com/wMkaMXTJjlQ",
             actors: [
                 "Tim Robbins",
                 "Morgan Freeman"
@@ -27329,7 +27329,7 @@ const MainView = ()=>{
                 },
                 death: null
             },
-            imagePath: "https://www.imdb.com/title/tt0468569/mediaviewer/rm4023877632/?ref_=tt_ov_i",
+            imagePath: "https://source.unsplash.com/wMkaMXTJjlQ",
             actors: [
                 "Christian Bale",
                 "Heath Ledger"
@@ -27354,7 +27354,7 @@ const MainView = ()=>{
                 },
                 death: null
             },
-            imagePath: "https://www.imdb.com/title/tt0167260/mediaviewer/rm584928512/?ref_=tt_ov_i",
+            imagePath: "https://source.unsplash.com/wMkaMXTJjlQ",
             actors: [
                 "Elijah Wood",
                 "Viggo Mortensen"
@@ -27368,14 +27368,14 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 79,
+        lineNumber: 76,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "there are no movies!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 87,
+        lineNumber: 84,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27386,16 +27386,16 @@ const MainView = ()=>{
                 }
             }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 93,
+                lineNumber: 90,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 91,
+        lineNumber: 88,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "RFasI9YSnk+4WJdBMYM9zoQBo50=");
+_s(MainView, "j/Aym59qnTHUItOtdRdMKhd4xRg=");
 _c = MainView;
 exports.default = MainView;
 var _c;

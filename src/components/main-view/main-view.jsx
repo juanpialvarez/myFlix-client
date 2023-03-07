@@ -21,8 +21,7 @@ const MainView = () => {
         birth: { $date: { $numberLong: "-344736000000" } },
         death: null,
       },
-      imagePath:
-        "https://www.imdb.com/title/tt0111161/mediaviewer/rm1690056449/?ref_=tt_ov_i",
+      imagePath: "https://source.unsplash.com/wMkaMXTJjlQ",
       actors: ["Tim Robbins", "Morgan Freeman"],
       featured: false,
     },
@@ -43,8 +42,7 @@ const MainView = () => {
         birth: { $date: "1970-07-30T00:00:00Z" },
         death: null,
       },
-      imagePath:
-        "https://www.imdb.com/title/tt0468569/mediaviewer/rm4023877632/?ref_=tt_ov_i",
+      imagePath: "https://source.unsplash.com/wMkaMXTJjlQ",
       actors: ["Christian Bale", "Heath Ledger"],
       featured: false,
     },
@@ -65,8 +63,7 @@ const MainView = () => {
         birth: { $date: { $numberLong: "-257904000000" } },
         death: null,
       },
-      imagePath:
-        "https://www.imdb.com/title/tt0167260/mediaviewer/rm584928512/?ref_=tt_ov_i",
+      imagePath: "https://source.unsplash.com/wMkaMXTJjlQ",
       actors: ["Elijah Wood", "Viggo Mortensen"],
       featured: false,
     },
