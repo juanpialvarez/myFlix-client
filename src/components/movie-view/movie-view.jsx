@@ -23,7 +23,7 @@ export const MovieView = ({ movie, onBackClick }) => {
   );
 };
 
-MovieView.protoTypes = {
+MovieView.propTypes = {
   image: PropType.string.isRequired,
   title: PropType.string.isRequired,
   genre: PropType.string.isRequired,
