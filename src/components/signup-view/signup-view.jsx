@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 
 export const SignupView = () => {
   const [user, setUser] = useState();
@@ -23,6 +24,7 @@ export const SignupView = () => {
         "Content-type": "application/json",
       },
     }).then((response) => {
+      console.log(response);
       if (response.ok) {
         alert("Signup Successful");
         window.location.reload;
@@ -31,21 +33,23 @@ export const SignupView = () => {
       }
     });
   };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username</Form.Label>
+        <Form.Control
           type="text"
           value={user}
           onChange={(e) => setUser(e.target.value)}
           required
           minLength="8"
         />
-      </label>
-      <label>
-        Email:
-        <input
+      </Form.Group>
+      <br />
+      <Form.Group controlId="formEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
           type="email"
           value={email}
           onChange={(e) => {
@@ -53,10 +57,11 @@ export const SignupView = () => {
           }}
           required
         />
-      </label>
-      <label>
-        Password:
-        <input
+      </Form.Group>
+      <br />
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
           type="password"
           value={password}
           onChange={(e) => {
@@ -64,19 +69,22 @@ export const SignupView = () => {
           }}
           required
         />
-      </label>
-      <label>
-        Birthday:
-        <input
+      </Form.Group>
+      <br />
+      <Form.Group controlId="formBirthday">
+        <Form.Label>Birthday</Form.Label>
+        <Form.Control
           type="date"
           value={birthday}
           onChange={(e) => {
             setBirthday(e.target.value);
           }}
           required
+          className="text-danger"
         />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+      </Form.Group>
+      <br />
+      <Button type="submit">Submit</Button>
+    </Form>
   );
 };
