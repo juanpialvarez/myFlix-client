@@ -35,10 +35,11 @@ export const SignupView = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className="text-danger" onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
         <Form.Label>Username</Form.Label>
         <Form.Control
+          className="text-danger"
           type="text"
           value={user}
           onChange={(e) => setUser(e.target.value)}
@@ -50,6 +51,7 @@ export const SignupView = () => {
       <Form.Group controlId="formEmail">
         <Form.Label>Email</Form.Label>
         <Form.Control
+          className="text-danger"
           type="email"
           value={email}
           onChange={(e) => {
@@ -62,6 +64,7 @@ export const SignupView = () => {
       <Form.Group controlId="formPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control
+          className="text-danger"
           type="password"
           value={password}
           onChange={(e) => {

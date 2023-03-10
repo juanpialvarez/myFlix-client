@@ -12,7 +12,7 @@ export const MovieView = ({ movies }) => {
   console.log(movie);
 
   return (
-    <div>
+    <>
       <div>
         <div>
           <img className="w-100" src={movie.imagePath} />
@@ -44,7 +44,7 @@ export const MovieView = ({ movies }) => {
             </Col>
           ))}
       </Row>
-    </div>
+    </>
   );
 };
 
@@ -53,5 +53,4 @@ MovieView.propTypes = {
   title: PropType.string.isRequired,
   genre: PropType.string.isRequired,
   director: PropType.string.isRequired,
-  onBackClick: PropType.func.isRequired,
 };

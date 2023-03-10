@@ -7,6 +7,8 @@ import { SignupView } from "../signup-view/signup-view";
 import { Col, Button, Container, Row } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useParams } from "react-router";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
 
 const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -14,7 +16,7 @@ const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [username, setUsername] = useState(user.userName);
 
   useEffect(() => {
     if (!token) return;
@@ -27,6 +29,12 @@ const MainView = () => {
 
   return (
     <BrowserRouter>
+      <NavigationBar
+        user={user}
+        onLoggedOut={() => {
+          setUser(null);
+        }}
+      />
       <Row>
         <Routes>
           <Route
@@ -82,11 +90,25 @@ const MainView = () => {
                 ) : movies.length === 0 ? (
                   <Col>No Movies to Show</Col>
                 ) : (
-                  movies.map((movie) => (
-                    <Col className="mb-5" key={movie._id} md={3}>
-                      <MovieCard movie={movie} />
-                    </Col>
-                  ))
+                  <>
+                    {movies.map((movie) => (
+                      <Col className="mb-5" key={movie._id} md={3}>
+                        <MovieCard movie={movie} />
+                      </Col>
+                    ))}
+                  </>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <ProfileView user={user} movies={movies} />
                 )}
               </>
             }

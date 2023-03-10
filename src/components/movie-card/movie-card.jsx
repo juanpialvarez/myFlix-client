@@ -21,6 +21,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
       >
         Open
       </Button>
+      <Button>+</Button>
     </Card>
   );
 };
