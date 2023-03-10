@@ -29,16 +29,17 @@ export const ProfileView = ({
         </div>
       </div>
       <Row>
-        {movies
-          .filter((m) => user.favouriteMovies.includes(m._id))
-          .map((m) => (
-            <>
-              <Col md={6} key={movie._id}>
-                <MovieCard movie={m} />
-              </Col>
-              <Button>Remove</Button>
-            </>
-          ))}
+        {user.favouriteMovies.length > 0 &&
+          movies
+            .filter((m) => user.favouriteMovies.includes(m._id))
+            .map((m) => (
+              <>
+                <Col md={6} key={m._id}>
+                  <MovieCard movie={m} />
+                  <Button>Remove</Button>
+                </Col>
+              </>
+            ))}
       </Row>
     </>
   );

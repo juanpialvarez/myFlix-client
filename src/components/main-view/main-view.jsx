@@ -16,7 +16,6 @@ const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
-  const [username, setUsername] = useState(user.userName);
 
   useEffect(() => {
     if (!token) return;
@@ -33,6 +32,8 @@ const MainView = () => {
         user={user}
         onLoggedOut={() => {
           setUser(null);
+          setToken(null);
+          localStorage.clear();
         }}
       />
       <Row>
@@ -94,6 +95,7 @@ const MainView = () => {
                     {movies.map((movie) => (
                       <Col className="mb-5" key={movie._id} md={3}>
                         <MovieCard movie={movie} />
+                        <Button>+</Button>
                       </Col>
                     ))}
                   </>
@@ -105,11 +107,7 @@ const MainView = () => {
             path="/profile"
             element={
               <>
-                {!user ? (
-                  <Navigate to="/login" replace />
-                ) : (
-                  <ProfileView user={user} movies={movies} />
-                )}
+                <ProfileView user={user} movies={movies} />
               </>
             }
           />

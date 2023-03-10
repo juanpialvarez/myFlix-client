@@ -3,37 +3,33 @@ import { Link } from "react-router-dom";
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
-    <Navbar>
+    <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand className="text-danger" as={Link} to={"/"}>
-          My Flix
+        <Navbar.Brand as={Link} to="/">
+          Books App
         </Navbar.Brand>
-        <Navbar.Toggle
-          className="text-danger"
-          aria-controls="basic-navbar-nav"
-        />
-        <Navbar.Collapse className="text-danger" id="basic-navbar-nav">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {!user ? (
+            {!user && (
               <>
-                <Nav.Link className="text-danger" as={Link} to="/login">
+                <Nav.Link as={Link} to="/login">
                   Login
                 </Nav.Link>
-                <Nav.Link className="text-danger" as={Link} to="/signup">
+                <Nav.Link as={Link} to="/signup">
                   Signup
                 </Nav.Link>
               </>
-            ) : (
+            )}
+            {user && (
               <>
-                <Nav.Link className="text-danger" as={Link} to="/">
+                <Nav.Link as={Link} to="/">
                   Home
                 </Nav.Link>
-                <Nav.Link className="text-danger" as={Link} to={`/profile`}>
+                <Nav.Link as={Link} to="/profile">
                   Profile
                 </Nav.Link>
-                <Nav.Link className="text-danger" onClick={onLoggedOut}>
-                  Logout
-                </Nav.Link>
+                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
               </>
             )}
           </Nav>
