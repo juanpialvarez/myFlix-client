@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { MovieCard } from "../movie-card/movie-card";
 
-export const MovieView = ({ movies }) => {
+export const MovieView = ({ movies, user, token }) => {
   const { movieId } = useParams();
 
   const movie = movies.find((m) => m._id === movieId);
@@ -40,7 +40,7 @@ export const MovieView = ({ movies }) => {
           .filter((m) => m.genre.name === movie.genre.name)
           .map((m) => (
             <Col md={6} key={movie._id}>
-              <MovieCard movie={m} />
+              <MovieCard movie={m} user={user} token={token} />
             </Col>
           ))}
       </Row>
@@ -48,9 +48,9 @@ export const MovieView = ({ movies }) => {
   );
 };
 
-MovieView.propTypes = {
-  image: PropType.string.isRequired,
-  title: PropType.string.isRequired,
-  genre: PropType.string.isRequired,
-  director: PropType.string.isRequired,
-};
+// MovieView.propTypes = {
+//   image: PropType.string.isRequired,
+//   title: PropType.string.isRequired,
+//   genre: PropType.string.isRequired,
+//   director: PropType.string.isRequired,
+// };

@@ -1,12 +1,31 @@
-import { Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col, Form } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 export const ProfileView = ({
   movies,
   user,
-  onUsernameUpdate,
+  token,
+  onUpdateClick,
   onDeregister,
 }) => {
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  useEffect(() => {
+    fetch(`https://myflix94.herokuapp.com/users/${user.userName}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setFavoriteMovies(data.favouriteMovies);
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("error");
+      });
+  }, [token]);
+
   return (
     <>
       <h1 className="text-danger">Profile</h1>
@@ -14,7 +33,6 @@ export const ProfileView = ({
         <div>
           <span className="text-danger">Name: </span>
           <span className="text-danger">{user.userName}</span>
-          <Button onClick={onUsernameUpdate}>Update</Button>
         </div>
         <div>
           <span className="text-danger">Emeil</span>
@@ -25,18 +43,29 @@ export const ProfileView = ({
           <span className="text-danger">{user.birthday}</span>
         </div>
         <div>
+          <br />
+          <Button onClick={onUpdateClick}>Update</Button>
+          <br />
+          <br />
           <Button onClick={onDeregister}>Deregister</Button>
+          <br />
         </div>
       </div>
       <Row>
-        {user.favouriteMovies.length > 0 &&
+        <h1 className="text-danger">Favorite Movies</h1>
+        {favoriteMovies.length > 0 &&
           movies
-            .filter((m) => user.favouriteMovies.includes(m._id))
+            .filter((m) => favoriteMovies.includes(m._id))
             .map((m) => (
               <>
-                <Col md={6} key={m._id}>
-                  <MovieCard movie={m} />
-                  <Button>Remove</Button>
+                <Col md={3} key={m._id}>
+                  <MovieCard
+                    className="mb-10"
+                    key={m._id}
+                    movie={m}
+                    user={user}
+                    token={token}
+                  />
                 </Col>
               </>
             ))}
