@@ -9,7 +9,47 @@ export const MovieView = ({ movies, user, token }) => {
 
   const movie = movies.find((m) => m._id === movieId);
 
-  console.log(movie);
+  const handleAddClick = (event) => {
+    event.preventDefault();
+
+    fetch(
+      `https://myflix94.herokuapp.com/users/${user.userName}/movies/${movie._id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => alert("Movie added to favorites"))
+      .catch((e) => {
+        console.log(e);
+        alert("Something went wrong");
+      });
+  };
+
+  const handleRemoveClick = (event) => {
+    event.preventDefault();
+
+    fetch(
+      `https://myflix94.herokuapp.com/users/${user.userName}/movies/${movie._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        alert("Movie removed from favorites");
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("Something went wrong");
+      });
+  };
 
   return (
     <>
@@ -35,11 +75,16 @@ export const MovieView = ({ movies, user, token }) => {
       </div>
       <br />
       <h2 className="text-danger"> Similar Movies</h2>
+      <div>
+        {" "}
+        <Button onClick={handleAddClick}>Add</Button>
+        <Button onClick={handleRemoveClick}>Remove</Button>
+      </div>
       <Row>
         {movies
           .filter((m) => m.genre.name === movie.genre.name)
           .map((m) => (
-            <Col md={6} key={movie._id}>
+            <Col md={6} key={encodeURIComponent(movie._id)}>
               <MovieCard movie={m} user={user} token={token} />
             </Col>
           ))}

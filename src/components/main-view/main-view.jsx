@@ -108,7 +108,21 @@ const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : (
-                  <ProfileView user={user} movies={movies} token={token} />
+                  <ProfileView
+                    user={user}
+                    movies={movies}
+                    token={token}
+                    onSuccess={() => {
+                      setUser(null);
+                      setToken(null);
+                      localStorage.clear();
+                    }}
+                    onDeregister={() => {
+                      setUser(null);
+                      setToken(null);
+                      localStorage.clear();
+                    }}
+                  />
                 )}
               </>
             }
