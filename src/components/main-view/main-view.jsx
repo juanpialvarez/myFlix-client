@@ -29,6 +29,7 @@ const MainView = () => {
     <BrowserRouter>
       <NavigationBar
         user={user}
+        movies={movies}
         onLoggedOut={() => {
           setUser(null);
           setToken(null);
@@ -92,7 +93,11 @@ const MainView = () => {
                 ) : (
                   <>
                     {movies.map((movie) => (
-                      <Col className="mb-5" key={movie._id} md={3}>
+                      <Col
+                        className="mb-5"
+                        key={encodeURIComponent(movie._id)}
+                        md={3}
+                      >
                         <MovieCard movie={movie} user={user} token={token} />
                       </Col>
                     ))}
