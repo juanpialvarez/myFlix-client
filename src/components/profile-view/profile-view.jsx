@@ -196,6 +196,7 @@ export const ProfileView = ({ movies, user, tk, onDeregister, onSuccess }) => {
         <div>
           <span className="text-danger">Name: </span>
           <span className="text-danger">{user.userName} </span>
+          <br />
           <Button onClick={handleShowUser}>Update</Button>
           <Modal show={showUser} onHide={handleCloseUser}>
             <Modal.Header closeButton>
@@ -230,9 +231,11 @@ export const ProfileView = ({ movies, user, tk, onDeregister, onSuccess }) => {
             </Modal.Footer>
           </Modal>
         </div>
+        <br />
         <div>
           <span className="text-danger">Email: </span>
           <span className="text-danger">{user.email} </span>
+          <br />
           <Button onClick={handleShowEmail}>Update</Button>
           <Modal show={showEmail} onHide={handleCloseEmail}>
             <Modal.Header closeButton>
@@ -267,9 +270,11 @@ export const ProfileView = ({ movies, user, tk, onDeregister, onSuccess }) => {
             </Modal.Footer>
           </Modal>
         </div>
+        <br />
         <div>
           <span className="text-danger">Brithday: </span>
           <span className="text-danger">{user.birthday}</span>
+          <br />
           <Button onClick={handleShowBirthday}>Update</Button>
           <Modal show={showBirthday} onHide={handleCloseBirthday}>
             <Modal.Header closeButton>
@@ -304,6 +309,7 @@ export const ProfileView = ({ movies, user, tk, onDeregister, onSuccess }) => {
             </Modal.Footer>
           </Modal>
         </div>
+        <br />
         <div>
           <Button onClick={handleShowPassword}>Update Password</Button>
           <Modal show={showPassword} onHide={handleClosePassword}>

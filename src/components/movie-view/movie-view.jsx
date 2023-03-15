@@ -69,6 +69,10 @@ export const MovieView = ({ movies, user, token }) => {
           <span className="text-danger">Director: </span>
           <span className="text-danger">{movie.director.name}</span>
         </div>
+        <div>
+          <span className="text-danger">Description: </span>
+          <span className="text-danger">{movie.description}</span>
+        </div>
         <Link to={"/"}>
           <Button className="back-button">Back</Button>
         </Link>

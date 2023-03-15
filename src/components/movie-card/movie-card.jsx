@@ -1,7 +1,7 @@
 import PropType from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export const MovieCard = ({ movie }) => {
   return (
