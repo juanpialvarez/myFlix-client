@@ -26,7 +26,7 @@ export const SignupView = () => {
     }).then((response) => {
       if (response.ok) {
         alert("Signup Successful");
-        window.location.reload;
+        window.location.replace("/login");
       } else {
         alert("Signup Failed");
       }

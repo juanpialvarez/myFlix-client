@@ -16,14 +16,7 @@ export const MovieCard = ({ movie }) => {
       <Card.Body className="text-truncate"> {movie.description} </Card.Body>
       <div>
         <Card.Footer>
-          <Button
-            as={Link}
-            to={`/movies/${encodeURIComponent(movie._id)}`}
-            className="text-decoration-none"
-            variant="link"
-          >
-            Open
-          </Button>
+          <Button className="text-decoration-none">Open</Button>
         </Card.Footer>
       </div>
     </Card>

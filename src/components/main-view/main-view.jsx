@@ -18,11 +18,22 @@ const MainView = () => {
   const [filterMovies, setFilter] = useState(false);
   const [genre, setGenre] = useState(null);
   const [director, setDirector] = useState(null);
+  const [filterData, setFilterData] = useState({});
   const filterRef = useRef(null);
 
   const handleFilter = (event) => {
     event.preventDefault();
     setFilter(true);
+    if (genre === "None") {
+      setGenre(null);
+    }
+    if (director === "None") {
+      setDirector(null);
+    }
+    setFilterData({
+      genre: genre,
+      director: director,
+    });
   };
   const handleFilterReset = (event) => {
     event.preventDefault();
@@ -53,48 +64,7 @@ const MainView = () => {
           localStorage.clear();
         }}
       />
-      <Row>
-        <Form ref={filterRef} onChange={handleFilter}>
-          <h2 className="text-danger">Filter</h2>
-          <Form.Group className="text-danger">
-            <Form.Label>Genre</Form.Label>
-            <Form.Select
-              className="text-danger"
-              onChange={(e) => {
-                setGenre(e.target.value);
-              }}
-            >
-              <option>None</option>
-              {movies
-                .map((movie) => movie.genre.name)
-                .filter((value, index, movie) => movie.indexOf(value) === index)
-                .map((genre) => (
-                  <option>{genre}</option>
-                ))}
-            </Form.Select>
-          </Form.Group>
-          <Form.Group className="text-danger">
-            <Form.Label>Director</Form.Label>
-            <Form.Select
-              defaultValue="none"
-              className="text-danger"
-              onChange={(e) => setDirector(e.target.value)}
-            >
-              <option value="none">None</option>
-              {movies
-                .map((movie) => movie.director.name)
-                .filter((value, index, movie) => movie.indexOf(value) === index)
-                .map((genre) => (
-                  <option>{genre}</option>
-                ))}
-            </Form.Select>
-          </Form.Group>
-          <br />
-          <Button type="click" onClick={handleFilterReset}>
-            Reset
-          </Button>
-        </Form>
-      </Row>
+
       <br />
       <Row>
         <Routes>
@@ -146,81 +116,149 @@ const MainView = () => {
             path="/"
             element={
               <>
-                {!user ? (
-                  <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <Col>No Movies to Show</Col>
-                ) : filterMovies ? (
-                  genre && !director ? (
-                    <>
-                      {movies
-                        .filter((movie) => movie.genre.name === genre)
-                        .map((movie) => (
-                          <Col
-                            className="mb-5"
-                            key={encodeURIComponent(movie._id)}
-                            md={3}
-                          >
-                            <MovieCard
-                              movie={movie}
-                              user={user}
-                              token={token}
-                            />
-                          </Col>
-                        ))}
-                    </>
-                  ) : !genre && director ? (
-                    <>
-                      {movies
-                        .filter((movie) => movie.director.name === director)
-                        .map((movie) => (
-                          <Col
-                            className="mb-5"
-                            key={encodeURIComponent(movie._id)}
-                            md={3}
-                          >
-                            <MovieCard
-                              movie={movie}
-                              user={user}
-                              token={token}
-                            />
-                          </Col>
-                        ))}
-                    </>
-                  ) : genre && director ? (
-                    <>
-                      {movies
-                        .filter(
-                          (movie) =>
-                            movie.director.name === director &&
-                            movie.genre.name === genre
-                        )
-                        .map((movie) => (
-                          <Col
-                            className="mb-5"
-                            key={encodeURIComponent(movie._id)}
-                            md={3}
-                          >
-                            <MovieCard
-                              movie={movie}
-                              user={user}
-                              token={token}
-                            />
-                          </Col>
-                        ))}
-                    </>
-                  ) : !genre && !director ? (
-                    <>
-                      {movies.map((movie) => (
-                        <Col
-                          className="mb-5"
-                          key={encodeURIComponent(movie._id)}
-                          md={3}
-                        >
-                          <MovieCard movie={movie} user={user} token={token} />
-                        </Col>
-                      ))}
-                    </>
+                <Row>
+                  <Form ref={filterRef} onSubmit={handleFilter}>
+                    <h2 className="text-danger">Filter</h2>
+                    <Form.Group className="text-danger">
+                      <Form.Label>Genre</Form.Label>
+                      <Form.Select
+                        className="text-danger"
+                        onChange={(e) => {
+                          setGenre(e.target.value);
+                        }}
+                      >
+                        <option value={null}>None</option>
+                        {movies
+                          .map((movie) => movie.genre.name)
+                          .filter(
+                            (value, index, movie) =>
+                              movie.indexOf(value) === index
+                          )
+                          .map((genre) => (
+                            <option>{genre}</option>
+                          ))}
+                      </Form.Select>
+                    </Form.Group>
+                    <Form.Group className="text-danger">
+                      <Form.Label>Director</Form.Label>
+                      <Form.Select
+                        className="text-danger"
+                        onChange={(e) => setDirector(e.target.value)}
+                      >
+                        <option value={null}>None</option>
+                        {movies
+                          .map((movie) => movie.director.name)
+                          .filter(
+                            (value, index, movie) =>
+                              movie.indexOf(value) === index
+                          )
+                          .map((genre) => (
+                            <option>{genre}</option>
+                          ))}
+                      </Form.Select>
+                    </Form.Group>
+                    <br />
+                    <Button type="submit" onClick={handleFilter}>
+                      Submit
+                    </Button>
+                    <Button type="click" onClick={handleFilterReset}>
+                      Reset
+                    </Button>
+                  </Form>
+                </Row>
+                <Row>
+                  {!user ? (
+                    <Navigate to="/login" replace />
+                  ) : movies.length === 0 ? (
+                    <Col>No Movies to Show</Col>
+                  ) : filterMovies ? (
+                    filterData.genre && !filterData.director ? (
+                      <>
+                        {movies
+                          .filter(
+                            (movie) => movie.genre.name === filterData.genre
+                          )
+                          .map((movie) => (
+                            <Col
+                              className="mb-5"
+                              key={encodeURIComponent(movie._id)}
+                              md={3}
+                            >
+                              <MovieCard
+                                key={encodeURIComponent(movie._id)}
+                                movie={movie}
+                                user={user}
+                                token={token}
+                              />
+                            </Col>
+                          ))}
+                      </>
+                    ) : !filterData.genre && filterData.director ? (
+                      <>
+                        {movies
+                          .filter(
+                            (movie) =>
+                              movie.director.name === filterData.director
+                          )
+                          .map((movie) => (
+                            <Col
+                              className="mb-5"
+                              key={encodeURIComponent(movie._id)}
+                              md={3}
+                            >
+                              <MovieCard
+                                key={encodeURIComponent(movie._id)}
+                                movie={movie}
+                                user={user}
+                                token={token}
+                              />
+                            </Col>
+                          ))}
+                      </>
+                    ) : filterData.genre && filterData.director ? (
+                      <>
+                        {movies
+                          .filter(
+                            (movie) =>
+                              movie.director.name === filterData.director &&
+                              movie.genre.name === filterData.genre
+                          )
+                          .map((movie) => (
+                            <Col
+                              className="mb-5"
+                              key={encodeURIComponent(movie._id)}
+                              md={3}
+                            >
+                              <MovieCard
+                                key={encodeURIComponent(movie._id)}
+                                movie={movie}
+                                user={user}
+                                token={token}
+                              />
+                            </Col>
+                          ))}
+                      </>
+                    ) : (
+                      !filterData.genre &&
+                      !filterData.director && (
+                        <>
+                          {movies.map((movie) => (
+                            <Col
+                              className="mb-5"
+                              key={encodeURIComponent(movie._id)}
+                              md={3}
+                            >
+                              <MovieCard
+                                key={encodeURIComponent(movie._id)}
+                                movie={movie}
+                                user={user}
+                                token={token}
+                              />
+                            </Col>
+                          ))}
+                        </>
+                      )
+                    )
                   ) : (
                     <>
                       {movies.map((movie) => (
@@ -229,24 +267,17 @@ const MainView = () => {
                           key={encodeURIComponent(movie._id)}
                           md={3}
                         >
-                          <MovieCard movie={movie} user={user} token={token} />
+                          <MovieCard
+                            movie={movie}
+                            key={encodeURIComponent(movie._id)}
+                            user={user}
+                            token={token}
+                          />
                         </Col>
                       ))}
                     </>
-                  )
-                ) : (
-                  <>
-                    {movies.map((movie) => (
-                      <Col
-                        className="mb-5"
-                        key={encodeURIComponent(movie._id)}
-                        md={3}
-                      >
-                        <MovieCard movie={movie} user={user} token={token} />
-                      </Col>
-                    ))}
-                  </>
-                )}
+                  )}
+                </Row>
               </>
             }
           />

@@ -57,7 +57,7 @@ export const NavigationBar = ({ user, onLoggedOut, movies }) => {
                 <Form onSubmit={handleSubmit} className="d-flex">
                   <Form.Control
                     type="search"
-                    placeholder="Search"
+                    defaultValue={"Search"}
                     value={title}
                     className="me-2 text-danger"
                     aria-label="Search"
