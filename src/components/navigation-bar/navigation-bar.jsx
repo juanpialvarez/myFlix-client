@@ -2,7 +2,7 @@ import { Navbar, Container, Nav, Form, Button } from "react-bootstrap";
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 
-export const NavigationBar = ({ user, onLoggedOut, movies }) => {
+export const NavigationBar = ({ user, onLogedOut, movies }) => {
   const [title, setTitle] = useState();
 
   const handleSubmit = (event) => {
@@ -53,7 +53,7 @@ export const NavigationBar = ({ user, onLoggedOut, movies }) => {
                 <Nav.Link as={Link} to="/profile">
                   Profile
                 </Nav.Link>
-                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                <Nav.Link onClick={onLogedOut}>Logout</Nav.Link>
                 <Form onSubmit={handleSubmit} className="d-flex">
                   <Form.Control
                     type="search"

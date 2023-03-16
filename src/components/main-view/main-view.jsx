@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
-import { LoginView } from "../loggin-view/loggin-view";
+import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { Col, Row, Form, Button } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -52,7 +52,7 @@ const MainView = () => {
       <NavigationBar
         user={user}
         movies={movies}
-        onLoggedOut={() => {
+        onLogedOut={() => {
           setUser(null);
           setToken(null);
           localStorage.clear();
