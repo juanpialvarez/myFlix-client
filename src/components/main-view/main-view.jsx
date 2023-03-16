@@ -24,12 +24,6 @@ const MainView = () => {
   const handleFilter = (event) => {
     event.preventDefault();
     setFilter(true);
-    if (genre === "None") {
-      setGenre(null);
-    }
-    if (director === "None") {
-      setDirector(null);
-    }
     setFilterData({
       genre: genre,
       director: director,
@@ -124,7 +118,9 @@ const MainView = () => {
                       <Form.Select
                         className="text-danger"
                         onChange={(e) => {
-                          setGenre(e.target.value);
+                          e.target.value === "None"
+                            ? setGenre(null)
+                            : setGenre(e.target.value);
                         }}
                       >
                         <option value={null}>None</option>
@@ -143,7 +139,11 @@ const MainView = () => {
                       <Form.Label>Director</Form.Label>
                       <Form.Select
                         className="text-danger"
-                        onChange={(e) => setDirector(e.target.value)}
+                        onChange={(e) => {
+                          e.target.value === "None"
+                            ? setDirector(null)
+                            : setDirector(e.target.value);
+                        }}
                       >
                         <option value={null}>None</option>
                         {movies
