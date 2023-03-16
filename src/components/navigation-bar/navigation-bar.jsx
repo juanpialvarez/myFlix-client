@@ -1,7 +1,31 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Form, Button } from "react-bootstrap";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, movies }) => {
+  const [title, setTitle] = useState();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const movie = new Promise((resolve, reject) => {
+      let m = movies.filter((m) => title.includes(m.title));
+      if (m && m.length > 0) {
+        resolve(m);
+      } else {
+        reject(`Movie ${title} not found`);
+      }
+    });
+    movie
+      .then((m) => {
+        [m] = m;
+        window.location.replace(`/movies/${encodeURIComponent(m._id)}`);
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  };
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -30,6 +54,19 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                   Profile
                 </Nav.Link>
                 <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                <Form onSubmit={handleSubmit} className="d-flex">
+                  <Form.Control
+                    type="search"
+                    defaultValue={"Search"}
+                    value={title}
+                    className="me-2 text-danger"
+                    aria-label="Search"
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <Button variant="outline-primary" type="submit">
+                    Search
+                  </Button>
+                </Form>
               </>
             )}
           </Nav>

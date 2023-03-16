@@ -1,7 +1,7 @@
 import PropType from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export const MovieCard = ({ movie }) => {
   return (
@@ -16,14 +16,7 @@ export const MovieCard = ({ movie }) => {
       <Card.Body className="text-truncate"> {movie.description} </Card.Body>
       <div>
         <Card.Footer>
-          <Button
-            as={Link}
-            to={`/movies/${encodeURIComponent(movie._id)}`}
-            className="text-decoration-none"
-            variant="link"
-          >
-            Open
-          </Button>
+          <Button className="text-decoration-none">Open</Button>
         </Card.Footer>
       </div>
     </Card>

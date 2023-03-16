@@ -69,6 +69,10 @@ export const MovieView = ({ movies, user, token }) => {
           <span className="text-danger">Director: </span>
           <span className="text-danger">{movie.director.name}</span>
         </div>
+        <div>
+          <span className="text-danger">Description: </span>
+          <span className="text-danger">{movie.description}</span>
+        </div>
         <Link to={"/"}>
           <Button className="back-button">Back</Button>
         </Link>
@@ -82,10 +86,17 @@ export const MovieView = ({ movies, user, token }) => {
       </div>
       <Row>
         {movies
-          .filter((m) => m.genre.name === movie.genre.name)
+          .filter(
+            (m) => m.genre.name === movie.genre.name && m.title !== movie.title
+          )
           .map((m) => (
-            <Col md={6} key={encodeURIComponent(movie._id)}>
-              <MovieCard movie={m} user={user} token={token} />
+            <Col md={6} key={encodeURIComponent(m._id)}>
+              <MovieCard
+                key={encodeURIComponent(m._id)}
+                movie={m}
+                user={user}
+                token={token}
+              />
             </Col>
           ))}
       </Row>
